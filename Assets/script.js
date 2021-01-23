@@ -1,10 +1,18 @@
 //variables
-var quizContainer = document.getElementById("quiz");
+var question = document.getElementById('question');
 var resultContainer = document.getElementById("results");
 var submitButton = document.getElementById("submit");
 var timeEL = document.getElementById("timer");
+var answerOne = document.getElementById(`a`);
+var answerTwo = document.getElementById(`b`);
+var answerThree = document.getElementById(`c`);
+var answerFour = document.getElementById(`d`);
+var answerDisplay = document.getElementById(`question-result`);
 var correctAnswerResponse = "Correct! lets go to the next question";
 var wrongAnswerResponse = "Wrong! Time penalty... Next Question!";
+var nextButton = "Next";
+var hightScore = "High Score";
+var emptyString = "";
 var correct = 0;
 var incorrect = 0;
 var i = 0;
@@ -56,7 +64,7 @@ function setTime() {
 
             //function call to end game
             console.log("times up");
-            //showResults();
+            gameOver();
         }
     }, 1000);
 };
@@ -66,46 +74,71 @@ function showQuestion(i) {
 
     var dispalyQuestion = myQuestions[i].question;
     var displayAnswers = [myQuestions[i].answers.a, myQuestions[i].answers.b, myQuestions[i].answers.c, myQuestions[i].answers.d]
-    var answerOne = document.getElementById(`a`);
+    /*var answerOne = document.getElementById(`a`);
     var answerTwo = document.getElementById(`b`);
     var answerThree = document.getElementById(`c`);
-    var answerFour = document.getElementById(`d`);
+    var answerFour = document.getElementById(`d`);*/
 
-    quizContainer.textContent = dispalyQuestion;
+    question.textContent = dispalyQuestion;
     answerOne.textContent = displayAnswers[0];
     answerTwo.textContent = displayAnswers[1];
     answerThree.textContent = displayAnswers[2];
     answerFour.textContent = displayAnswers[3];
 
+    if (i > 0) {
+        answerDisplay.textContent = emptyString;
+    }
 
-    //return i++;
 }
 
 function checkAnswer(answer) {
-    var answerDisplay = document.getElementById(`question-result`);
+
+    submitButton.textContent = nextButton;
+
+    //if else statement that is comparing the selection against the correct answer, tallying the correct/incorrect score and displaying the next question
     if (answer === myQuestions[i].correctAnswer) {
-        console.log(i);
-        i++;
         answerDisplay.textContent = correctAnswerResponse;
+        correct++;
+        console.log(i, correct);
 
     } else {
         answerDisplay.textContent = wrongAnswerResponse;
-        i++;
-        console.log(i);
-        showQuestion(i);
+        incorrect++;
+        console.log(i, incorrect);
+
     }
+    i++
     return i;
 }
 
+function gameOver() {
+    /*--- clearing the screen ---*/
+    question.textContent = emptyString;
+    answerOne.textContent = emptyString;
+    answerTwo.textContent = emptyString;
+    answerThree.textContent = emptyString;
+    answerFour.textContent = emptyString;
+    answerDisplay.textContent = emptyString;
+
+    question.textContent = `Thanks for playing! Your score:`;
+    answerOne.textContent = `Correct Answers: ${correct}`;
+    answerTwo.textContent = `Incorrect Answers: ${incorrect}`;
+    answerFour.textContent = `Click the button to log your score on the High Score list`;
+
+    submitButton.textContent = hightScore;
+    submitButton.setAttribute
+
+}
 
 
 //function to build quiz
 submitButton.addEventListener("click", function (event) {
-    event.preventDefault();
+    //event.preventDefault();
     console.log("functionTest");
-    let i = 0;
     //start timer - week 4 - activit 9
-    setTime();
+    if (i === 0) {
+        setTime();
+    };
 
     showQuestion(i);
 
