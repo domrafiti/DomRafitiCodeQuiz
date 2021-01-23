@@ -3,7 +3,11 @@ var quizContainer = document.getElementById("quiz");
 var resultContainer = document.getElementById("results");
 var submitButton = document.getElementById("submit");
 var timeEL = document.getElementById("timer");
-var score = 0;
+var correctAnswerResponse = "Correct! lets go to the next question";
+var wrongAnswerResponse = "Wrong! Time penalty... Next Question!";
+var correct = 0;
+var incorrect = 0;
+var i = 0;
 var secondsLeft = 15;
 var myQuestions = [
     {
@@ -57,26 +61,40 @@ function setTime() {
     }, 1000);
 };
 
-function showQuestion() {
-    let i = 0;
-    document.getElementById(`quiz`).innerHTML = myQuestions[i].question;
 
-    document.getElementById(`answers`).innerHTML = myQuestions[i].answers.a;
-    document.createElement('div#answerB');
+function showQuestion(i) {
 
-    for (i = 0; i < myQuestions.length; i++) {
-        const question = myQuestions[i].question;
-        const answerA = myQuestions[i].answers.a;
-        const answerB = myQuestions[i].answers.b;
-        const answerC = myQuestions[i].answers.c;
-        const answerD = myQuestions[i].answers.d;
-        console.log(question);
-        console.log(answerA);
-        console.log(answerB);
-        console.log(answerC);
-        console.log(answerD);
+    var dispalyQuestion = myQuestions[i].question;
+    var displayAnswers = [myQuestions[i].answers.a, myQuestions[i].answers.b, myQuestions[i].answers.c, myQuestions[i].answers.d]
+    var answerOne = document.getElementById(`a`);
+    var answerTwo = document.getElementById(`b`);
+    var answerThree = document.getElementById(`c`);
+    var answerFour = document.getElementById(`d`);
 
+    quizContainer.textContent = dispalyQuestion;
+    answerOne.textContent = displayAnswers[0];
+    answerTwo.textContent = displayAnswers[1];
+    answerThree.textContent = displayAnswers[2];
+    answerFour.textContent = displayAnswers[3];
+
+
+    //return i++;
+}
+
+function checkAnswer(answer) {
+    var answerDisplay = document.getElementById(`question-result`);
+    if (answer === myQuestions[i].correctAnswer) {
+        console.log(i);
+        i++;
+        answerDisplay.textContent = correctAnswerResponse;
+
+    } else {
+        answerDisplay.textContent = wrongAnswerResponse;
+        i++;
+        console.log(i);
+        showQuestion(i);
     }
+    return i;
 }
 
 
@@ -89,7 +107,10 @@ submitButton.addEventListener("click", function (event) {
     //start timer - week 4 - activit 9
     setTime();
 
-    showQuestion();
+    showQuestion(i);
+
+
+
 
     //add in button for answer selection
 
