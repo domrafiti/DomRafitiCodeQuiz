@@ -14,7 +14,24 @@
 </head>
 
 <body>
-    <p>Something here</p>
+    <header>
+        <div id="main-page"><a href="./index.html">Back to Main Page</a></div>
+    </header>
+
+    <div class="card">
+        <h1>High Score Tracker</h1>
+        <form id="hi-score-form" method="POST">
+            <label for="hi-score-text">Add your initials </label>
+            <input type="text" placeholder="abc" name="hi-score-text" id="hi-score-text" />
+        </form>
+        <p>High Score: <span id="hi-score-count">0</span></p>
+        <ul id="hi-score-list"></ul>
+
+    </div>
+
+
+
+    <script src="./Assets/hs-script.js"></script>
 </body>
 
 </html>

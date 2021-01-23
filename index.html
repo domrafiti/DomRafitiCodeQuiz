@@ -16,35 +16,66 @@
 <body>
     <!--header row-->
 
-    <head>
+    <header>
         <div class="row">
             <div class="col-xs-3 col-sm-3">
                 <div id="highscores"><a href="./highscores.html">View Highscores</a></div>
             </div>
 
             <div class="col-xs-6 col-sm-6">
-                <h1>Interactive Javascrip Quiz</h1>
+                <h1>Interactive Javascript Quiz</h1>
             </div>
 
             <div class="col-xs-3 col-sm-3">
                 <div id="timer"></div>
             </div>
         </div>
-    </head>
+    </header>
 
     <main>
-        <div id="question"> </div>
-        <div id="choices">
-            <form action="">
-                <div class="choice" id="a" onclick="checkAnswer('a')"></div>
-                <div class="choice" id="b" onclick="checkAnswer('b')"></div>
-                <div class="choice" id="c" onclick="checkAnswer('c')"></div>
-                <div class="choice" id="d" onclick="checkAnswer('d')"></div>
-            </form>
+        <div class="row">
+            <div class="col-xs-2 col-sm-2">
+                <!--EMPTY ON PURPOSE-->
+            </div>
+            <div class="col-xs-10 col-sm-10">
+                <div id="question"> </div>
+            </div>
         </div>
-        <button id="submit">Start</button>
+        <div class="row">
+            <div class="col-xs-3 col-sm-3">
+                <!--EMPTY ON PURPOSE-->
+            </div>
+            <div class="col-xs-9 col-sm-9">
+                <div id="choices">
+                    <form action="">
+                        <div class="choice" id="a" onclick="checkAnswer('a')"></div>
+                        <div class="choice" id="b" onclick="checkAnswer('b')"></div>
+                        <div class="choice" id="c" onclick="checkAnswer('c')"></div>
+                        <div class="choice" id="d" onclick="checkAnswer('d')"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-        <div id="question-result"> </div>
+        <div class="row">
+            <div class="col-xs-2 col-sm-2">
+                <!--EMPTY ON PURPOSE-->
+            </div>
+            <div class="col-xs-10 col-sm-10">
+                <button id="submit">Start</button>
+                <button id="reset" onclick="resetGame()">Play Again</button>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-2">
+                <!--EMPTY ON PURPOSE-->
+            </div>
+            <div class="col-xs-10 col-sm-10">
+                <div id="question-result"> </div>
+            </div>
+        </div>
+
     </main>
 
 

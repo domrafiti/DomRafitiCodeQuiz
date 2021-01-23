@@ -13,8 +13,9 @@ var wrongAnswerResponse = "Wrong! Time penalty... Next Question!";
 var nextButton = "Next";
 var hightScore = "High Score";
 var emptyString = "";
-var correct = 0;
-var incorrect = 0;
+var correct = localStorage.getItem("correct");
+var incorrect = localStorage.getItem("incorrect");
+var totalScore = localStorage.getItem("high score");
 var i = 0;
 var secondsLeft = 15;
 var myQuestions = [
@@ -80,22 +81,23 @@ var myQuestions = [
     },
 ];
 
-
-
 //----------------function declaration----------------------------------//
 /*This function will set the timer and be called from the Build quiz function.*/
 function setTime() {
     var timeInterval = setInterval(function () {
         secondsLeft--
-        timeEL.textContent = `Timer: ${secondsLeft}`;
 
-        if (secondsLeft === 0) {
+        if (secondsLeft <= 0) {
             clearInterval(timeInterval);
+            secondsLeft = 0;
 
             //function call to end game
             console.log("times up");
             gameOver();
         }
+
+        timeEL.textContent = `Timer: ${secondsLeft}`;
+
     }, 1000);
 };
 
@@ -114,7 +116,7 @@ function showQuestion(i) {
     if (i > 0) {
         answerDisplay.textContent = emptyString;
     }
-}
+};
 
 function checkAnswer(answer) {
 
@@ -124,10 +126,19 @@ function checkAnswer(answer) {
     if (answer === myQuestions[i].correctAnswer) {
         answerDisplay.textContent = correctAnswerResponse;
         correct++;
+        localStorage.setItem("correct", correct);
         console.log(i, correct);
     } else {
         answerDisplay.textContent = wrongAnswerResponse;
         incorrect++;
+        localStorage.setItem("incorrect", incorrect);
+
+        //check to see if there is less than 5 seconds remaining.
+        if (secondsLeft <= 5) {
+            gameOver();
+        }
+        //time penalty
+        secondsLeft = secondsLeft - 5;
         console.log(i, incorrect);
     }
 
@@ -135,15 +146,16 @@ function checkAnswer(answer) {
     i++;
 
     //call gameOver function if questions are all answered
-    if (i > myQuestions.length) {
+    if (i >= myQuestions.length) {
         gameOver();
     }
 
-    return i;
-}
+    return i, correct;
+};
 
 function gameOver() {
     /*--- clearing the screen ---*/
+
     question.textContent = emptyString;
     answerOne.textContent = emptyString;
     answerTwo.textContent = emptyString;
@@ -151,21 +163,45 @@ function gameOver() {
     answerFour.textContent = emptyString;
     answerDisplay.textContent = emptyString;
 
+    //Results Displays
     question.textContent = `Thanks for playing! Your score:`;
     answerOne.textContent = `Correct Answers: ${correct}`;
     answerTwo.textContent = `Incorrect Answers: ${incorrect}`;
     answerFour.textContent = `Click the button to log your score on the High Score list`;
 
     //submitButton.textContent = hightScore;
-    submitButton.innerHTML = '<a href="./highscores.html">Submit High Score</a>'
+    submitButton.innerHTML = '<a href="./highscores.html">Submit High Score</a>';
 
-}
+    submitButton.addEventListener("click", function () {
+        localStorage.setItem("high score", correct);
+
+        localStorage.setItem("correct", 0);
+        localStorage.setItem("incorrect", 0);
+    });
+
+
+};
+
+function resetGame() {
+    // question.textContent = emptyString;
+    // answerOne.textContent = emptyString;
+    // answerTwo.textContent = emptyString;
+    // answerThree.textContent = emptyString;
+    // answerFour.textContent = emptyString;
+    // answerDisplay.textContent = emptyString;
+
+    localStorage.setItem("correct", 0);
+    localStorage.setItem("incorrect", 0);
+
+    location.reload();
+};
+
 
 
 //function to build quiz
 submitButton.addEventListener("click", function (event) {
     //event.preventDefault();
-    console.log("functionTest");
+    //console.log("functionTest");
     //start timer - week 4 - activit 9
     if (i === 0) {
         setTime();
