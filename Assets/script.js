@@ -39,14 +39,44 @@ var myQuestions = [
         correctAnswer: "b"
     },
     {
-        question: "",
+        question: "Which of the following is not a JavaScript data type?",
         answers: {
-            a: "",
-            b: "",
-            c: "",
-            d: "",
+            a: "Boolean",
+            b: "String",
+            c: "Object",
+            d: "Dan Kaltenbaugh",
         },
-        correctAnswer: ""
+        correctAnswer: "d"
+    },
+    {
+        question: "What kind of language is JavaScript?",
+        answers: {
+            a: "scripting",
+            b: "foreign",
+            c: "false",
+            d: "Dan Kaltenbaugh",
+        },
+        correctAnswer: "a"
+    },
+    {
+        question: "To make JavaScript work you must include what in your HTML file?",
+        answers: {
+            a: "head tag",
+            b: "Dan Kaltenbaugh",
+            c: "java tag",
+            d: "script tag",
+        },
+        correctAnswer: "d"
+    },
+    {
+        question: "What does DOM stand for?",
+        answers: {
+            a: "Dan Kaltenbaugh",
+            b: "Doesnt Open Much",
+            c: "Document Object Model",
+            d: "Donuts and Oreos Matter",
+        },
+        correctAnswer: "c"
     },
 ];
 
@@ -69,15 +99,11 @@ function setTime() {
     }, 1000);
 };
 
-
+/*function to display the question (or next question) and to clear the answer response */
 function showQuestion(i) {
 
     var dispalyQuestion = myQuestions[i].question;
     var displayAnswers = [myQuestions[i].answers.a, myQuestions[i].answers.b, myQuestions[i].answers.c, myQuestions[i].answers.d]
-    /*var answerOne = document.getElementById(`a`);
-    var answerTwo = document.getElementById(`b`);
-    var answerThree = document.getElementById(`c`);
-    var answerFour = document.getElementById(`d`);*/
 
     question.textContent = dispalyQuestion;
     answerOne.textContent = displayAnswers[0];
@@ -88,7 +114,6 @@ function showQuestion(i) {
     if (i > 0) {
         answerDisplay.textContent = emptyString;
     }
-
 }
 
 function checkAnswer(answer) {
@@ -100,14 +125,20 @@ function checkAnswer(answer) {
         answerDisplay.textContent = correctAnswerResponse;
         correct++;
         console.log(i, correct);
-
     } else {
         answerDisplay.textContent = wrongAnswerResponse;
         incorrect++;
         console.log(i, incorrect);
-
     }
-    i++
+
+    //adding to variable 'i' to help advance to next question
+    i++;
+
+    //call gameOver function if questions are all answered
+    if (i > myQuestions.length) {
+        gameOver();
+    }
+
     return i;
 }
 
@@ -125,8 +156,8 @@ function gameOver() {
     answerTwo.textContent = `Incorrect Answers: ${incorrect}`;
     answerFour.textContent = `Click the button to log your score on the High Score list`;
 
-    submitButton.textContent = hightScore;
-    submitButton.setAttribute
+    //submitButton.textContent = hightScore;
+    submitButton.innerHTML = '<a href="./highscores.html">Submit High Score</a>'
 
 }
 
