@@ -1,8 +1,7 @@
 //variables
 var question = document.getElementById('question');
-var resultContainer = document.getElementById("results");
-var submitButton = document.getElementById("submit");
-var timeEL = document.getElementById("timer");
+var submitButton = document.getElementById(`submit`);
+var timeEL = document.getElementById(`timer`);
 var answerOne = document.getElementById(`a`);
 var answerTwo = document.getElementById(`b`);
 var answerThree = document.getElementById(`c`);
@@ -91,8 +90,6 @@ function setTime() {
             clearInterval(timeInterval);
             secondsLeft = 0;
 
-            //function call to end game
-            console.log("times up");
             gameOver();
         }
 
@@ -118,6 +115,7 @@ function showQuestion(i) {
     }
 };
 
+/*---This function is called on button click as defined in the index.HTML file---*/
 function checkAnswer(answer) {
 
     submitButton.textContent = nextButton;
@@ -150,12 +148,13 @@ function checkAnswer(answer) {
         gameOver();
     }
 
+    //returning i and the number of correct answers to be used for high score tabulation
     return i, correct;
 };
 
+/*---this function is used when the game is over, clears the screen, prompts the user to play again or log their high score---*/
 function gameOver() {
-    /*--- clearing the screen ---*/
-
+    //clears the screen
     question.textContent = emptyString;
     answerOne.textContent = emptyString;
     answerTwo.textContent = emptyString;
@@ -174,64 +173,38 @@ function gameOver() {
 
     submitButton.addEventListener("click", function () {
         localStorage.setItem("high score", correct);
-
         localStorage.setItem("correct", 0);
         localStorage.setItem("incorrect", 0);
     });
-
-
 };
 
+/*---this funtion clears local storage and reloads the page, giving the user a fresh gameplay experience---*/
 function resetGame() {
-    // question.textContent = emptyString;
-    // answerOne.textContent = emptyString;
-    // answerTwo.textContent = emptyString;
-    // answerThree.textContent = emptyString;
-    // answerFour.textContent = emptyString;
-    // answerDisplay.textContent = emptyString;
-
     localStorage.setItem("correct", 0);
     localStorage.setItem("incorrect", 0);
 
     location.reload();
 };
 
-
-
-//function to build quiz
+/*---this is the start of the entire program and is listening for the submit button to be click, then starts the timer and shows the questions---*/
 submitButton.addEventListener("click", function (event) {
-    //event.preventDefault();
-    //console.log("functionTest");
-    //start timer - week 4 - activit 9
     if (i === 0) {
         setTime();
     };
+    function showQuestion(i) {
 
+        var dispalyQuestion = myQuestions[i].question;
+        var displayAnswers = [myQuestions[i].answers.a, myQuestions[i].answers.b, myQuestions[i].answers.c, myQuestions[i].answers.d]
+
+        question.textContent = dispalyQuestion;
+        answerOne.textContent = displayAnswers[0];
+        answerTwo.textContent = displayAnswers[1];
+        answerThree.textContent = displayAnswers[2];
+        answerFour.textContent = displayAnswers[3];
+
+        if (i > 0) {
+            answerDisplay.textContent = emptyString;
+        }
+    };
     showQuestion(i);
-
-
-
-
-    //add in button for answer selection
-
-    //select in array and present question and answer 
-
-    //store selection - immediate evlauation of right or wrong answer
 });
-
-
-    //function to show results
-
-        //on click
-
-        //review array/object
-
-        //compare against selection
-
-        //present message about correct / incorrect
-
-        //return result to tabulate score
-
-    //function to store score in local memory - week 4 - activity 26
-
-//function calls 
