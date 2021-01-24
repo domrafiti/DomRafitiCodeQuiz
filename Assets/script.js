@@ -16,7 +16,7 @@ var correct = localStorage.getItem("correct");
 var incorrect = localStorage.getItem("incorrect");
 var totalScore = localStorage.getItem("high score");
 var i = 0;
-var secondsLeft = 15;
+var secondsLeft = 30;
 var myQuestions = [
     {
         question: "Who invented JavaScript?",
@@ -161,6 +161,8 @@ function gameOver() {
     answerThree.textContent = emptyString;
     answerFour.textContent = emptyString;
     answerDisplay.textContent = emptyString;
+
+    secondsLeft = 0;
 
     //Results Displays
     question.textContent = `Thanks for playing! Your score:`;

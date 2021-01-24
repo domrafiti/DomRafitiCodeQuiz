@@ -1,4 +1,4 @@
-Program requirements are outlined below. I've written a series of functions that pairs with HTML to quiz a user about Javascript. Once the quiz is complete, the user is able to enter their initials into a high score list.
+Program requirements are outlined below. I've written a series of functions that pairs with HTML to quiz a user about Javascript. Once the quiz is complete, the user is able to enter their initials into a high score list. this project was very challenging and i spent most of the time getting the javascript to work and refrained from spending time on having a pretty and less functioning program.
 
 # 04 Web APIs: Code Quiz
 
