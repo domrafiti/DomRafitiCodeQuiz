@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
         integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>JavaScript Quiz High Score</title>
 </head>
 
 <body>
@@ -18,14 +18,19 @@
         <div id="main-page"><a href="./index.html">Back to Main Page</a></div>
     </header>
 
+
     <div class="card">
         <h1>High Score Tracker</h1>
+        <div id=hi-score>
+            <p>Your high score was: </p>
+        </div>
         <form id="hi-score-form" method="POST">
-            <label for="hi-score-text">Add your initials </label>
+            <label for="hi-score-text">Add your initials: </label>
             <input type="text" placeholder="abc" name="hi-score-text" id="hi-score-text" />
         </form>
-        <p>High Score: <span id="hi-score-count">0</span></p>
-        <ul id="hi-score-list"></ul>
+        <p>High Score Entries: <span id="hi-score-count">0</span></p>
+        <ol id="hi-score-list"></ol>
+        <ol id="hi-score-list-one"></ol>
 
     </div>
 

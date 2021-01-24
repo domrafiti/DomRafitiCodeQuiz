@@ -192,6 +192,7 @@ submitButton.addEventListener("click", function (event) {
         setTime();
     };
     function showQuestion(i) {
+        localStorage.setItem("high score", 0);
 
         var dispalyQuestion = myQuestions[i].question;
         var displayAnswers = [myQuestions[i].answers.a, myQuestions[i].answers.b, myQuestions[i].answers.c, myQuestions[i].answers.d]
